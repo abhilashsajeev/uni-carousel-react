@@ -1,0 +1,23 @@
+{
+  "name": "uni-carousel-react",
+  "main": "index.js",
+  "version": "0.1.0",
+  "homepage": "https://github.com/kenwheeler/nuka-carousel",
+  "authors": [
+    "Abhilash <abhilashsajeev@gmail.com>"
+  ],
+  "description": "A custom edited version of nuka-carousel",
+  "keywords": [
+    "Carousel",
+    "React",
+    "Nuka"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
