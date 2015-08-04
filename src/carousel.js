@@ -377,9 +377,11 @@ const Carousel = React.createClass({
       return;
     }
     var padding = 0;
-    // if(this.state.currentSlide - this.props.slidesToScroll <1){
-    //   padding = 1;
-    // }
+    if(this.props.children.length>=6){
+      if(this.props.children.length - (this.state.currentSlide+1)<3){
+        padding = 1;
+      }      
+    }
     // if(this.props.children.length - (this.state.currentSlide+1)<3){
     //   padding = 1;
     // }    
