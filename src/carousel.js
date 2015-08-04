@@ -153,39 +153,41 @@ const Carousel = React.createClass({
 
     return {
       onTouchStart(e) {
+        var start = +new Date();
         self.touchObject = {
           startX: event.touches[0].pageX,
-          startY: event.touches[0].pageY
-        }
+          startY: event.touches[0].pageY,
+          time:start
+        };
       },
       onTouchMove(e) {
-        var direction = self.swipeDirection(
-          self.touchObject.startX,
-          e.touches[0].pageX,
-          self.touchObject.startY,
-          e.touches[0].pageY
-        );
-
+        var direction = self.swipeDirection(self.touchObject.startX, e.touches[0].pageX, self.touchObject.startY, e.touches[0].pageY);
         if (direction !== 0) {
           e.preventDefault();
         }
-
+        
         self.touchObject = {
           startX: self.touchObject.startX,
           startY: self.touchObject.startY,
           endX: e.touches[0].pageX,
           endY: e.touches[0].pageY,
           length: Math.round(Math.sqrt(Math.pow(e.touches[0].pageX - self.touchObject.startX, 2))),
-          direction: direction
-        }
+          direction: direction,
+          time : self.touchObject.time
+        };
 
         self.setState({
-          left: self.props.vertical ? 0 : (self.state.slideWidth * self.state.currentSlide + (self.touchObject.length * self.touchObject.direction)) * -1,
-          top: self.props.vertical ? (self.state.slideWidth * self.state.currentSlide + (self.touchObject.length * self.touchObject.direction)) * -1 : 0
+          left: self.props.vertical ? 0 : (self.state.slideWidth * self.state.currentSlide + self.touchObject.length * self.touchObject.direction) * -1,
+          top: self.props.vertical ? (self.state.slideWidth * self.state.currentSlide + self.touchObject.length * self.touchObject.direction) * -1 : 0
         });
       },
       onTouchEnd(e) {
-        self.handleSwipe(e);
+        var distance = self.touchObject.startX - self.touchObject.endX;
+        var end = +new Date();
+        var time = self.touchObject.time - end;
+        var velocity = Math.abs(Math.round(distance/time));
+        console.log("Velocity ",velocity);
+        self.handleSwipe(e,velocity);
       },
       onTouchCancel(e) {
         self.handleSwipe(e);
@@ -204,9 +206,11 @@ const Carousel = React.createClass({
 
     return {
       onMouseDown(e) {
+        var start = +new Date();
         self.touchObject = {
-            startX: e.clientX,
-            startY: e.clientY
+          startX: e.clientX,
+          startY: e.clientY,
+          time:start
         };
 
         self.setState({
@@ -218,46 +222,44 @@ const Carousel = React.createClass({
           return;
         }
 
-        var direction = self.swipeDirection(
-          self.touchObject.startX,
-          e.clientX,
-          self.touchObject.startY,
-          e.clientY
-        );
-
+        var direction = self.swipeDirection(self.touchObject.startX, e.clientX, self.touchObject.startY, e.clientY);
+        self.dist = self.swipeDistance(self.touchObject.startX, e.clientX);
         if (direction !== 0) {
           e.preventDefault();
         }
 
-        var length = self.props.vertical ? Math.round(Math.sqrt(Math.pow(e.clientY - self.touchObject.startY, 2)))
-                                         : Math.round(Math.sqrt(Math.pow(e.clientX - self.touchObject.startX, 2)))
-
+        var length = self.props.vertical ? Math.round(Math.sqrt(Math.pow(e.clientY - self.touchObject.startY, 2))) : Math.round(Math.sqrt(Math.pow(e.clientX - self.touchObject.startX, 2)));
         self.touchObject = {
           startX: self.touchObject.startX,
           startY: self.touchObject.startY,
           endX: e.clientX,
           endY: e.clientY,
           length: length,
-          direction: direction
+          direction: direction,
+          time:self.touchObject.time
         };
 
         self.setState({
           left: self.props.vertical ? 0 : self.getTargetLeft(self.touchObject.length * self.touchObject.direction),
           top: self.props.vertical ? self.getTargetLeft(self.touchObject.length * self.touchObject.direction) : 0
         });
+        
       },
       onMouseUp(e) {
         if (!self.state.dragging) {
           return;
         }
-
-        self.handleSwipe(e);
+        var distance = self.touchObject.startX - self.touchObject.endX;
+        var end = +new Date();
+        var time = self.touchObject.time - end;
+        var velocity = Math.abs(Math.round(distance/time));
+        console.log("Velocity ",velocity);
+        self.handleSwipe(e,velocity,distance);
       },
       onMouseLeave(e) {
         if (!self.state.dragging) {
           return;
         }
-
         self.handleSwipe(e);
       }
     }
@@ -271,7 +273,9 @@ const Carousel = React.createClass({
     }
   },
 
-  handleSwipe(e) {
+  handleSwipe(e,velocity,distance) {
+    var velocity = velocity ||0;
+    var distance = distance ||0;
     if (typeof (this.touchObject.length) !== 'undefined' && this.touchObject.length > 44) {
       this.clickSafe = true;
     } else {
@@ -283,13 +287,13 @@ const Carousel = React.createClass({
         if (this.state.currentSlide >= this.props.children.length - this.props.slidesToScroll) {
           this.animateSlide(tweenState.easingTypes[this.props.edgeEasing]);
         } else {
-          this.nextSlide();
+          this.nextSlide(velocity,distance);
         }
       } else if (this.touchObject.direction === -1) {
         if (this.state.currentSlide <= 0) {
           this.animateSlide(tweenState.easingTypes[this.props.edgeEasing]);
         } else {
-          this.previousSlide();
+          this.previousSlide(velocity,distance);
         }
       }
     } else {
@@ -350,18 +354,35 @@ const Carousel = React.createClass({
     });
   },
 
-  nextSlide() {
+  nextSlide(velocity,distance) {
+    console.log("Got velocity inside nextSlide",velocity);
     var self = this;
     if (this.state.currentSlide + this.props.slidesToScroll >= this.props.children.length) {
       return;
     }
 
     var sum = this.state.currentSlide + this.props.slidesToScroll;
+
     if((this.props.children.length - sum)<3){
-      this.diff = this.props.children.length - sum - 1;
+      this.diff = this.props.children.length - sum - 2;
       sum = this.state.currentSlide + this.diff;
+    }else{
+      if(velocity>=3){
+        if(distance > window.innerWidth*0.8)
+          sum = 0;  
+        else
+          sum = this.props.children.length - this.props.slidesToShow;
+      }else if(velocity === 2){
+        if(distance > window.innerWidth*0.65)
+          sum = (sum + 3)<=(this.props.children.length - this.props.slidesToShow)?sum+3:sum;
+        else
+          sum = (sum + 3)<=(this.props.children.length - this.props.slidesToShow)?sum+2:sum;
+      }else if(velocity === 1){
+        sum = (sum + 2)<=(this.props.children.length - this.props.slidesToShow)?sum+2:sum; 
+      }else {
+       console.log("same to same") ;
+      }  
     }
-    console.log("sum");
     this.setState({
       currentSlide: sum
     }, function () {
@@ -370,28 +391,46 @@ const Carousel = React.createClass({
     });
   },
 
-  previousSlide() {
-   var self = this;
+  previousSlide(velocity,distance) {
+    console.log("Got distance inside previousSlide",velocity)
+    var self = this;
     var difference = this.state.currentSlide - this.props.slidesToScroll;
     if (difference < 0) {
       return;
     }
     var padding = 0;
-    if(this.props.children.length>=6){
-      if(this.props.children.length - (this.state.currentSlide+1)<3){
-        padding = 1;
-      }      
-    }
-    // if(this.props.children.length - (this.state.currentSlide+1)<3){
-    //   padding = 1;
-    // }    
-    
-    // if(this.diff>0){
-    //   padding = this.diff;
-    //   this.diff -= 1  ;
+    // if(this.props.children.length>=6){
+    //   if(this.props.children.length - (this.state.currentSlide+1)<3){
+    //     padding = 1;
+    //   }      
     // }
+    var slide = (difference< this.props.slidesToScroll)?difference+1:difference;
+    if(difference === 0){
+      slide  = 0;
+    }else{
+      if(velocity>=3){
+        if(distance > window.innerWidth*0.8){
+          slide = 0;  
+        }else{
+          slide = (slide-3)<1?0:slide-3;  
+        }
+        
+      }else if(velocity === 2){
+        if(distance > window.innerWidth*0.65)
+          slide = (slide-2)<1?0:slide-2;
+        else
+          slide = (slide-2)<1?0:slide-1;
+
+      }else if(velocity === 1){
+        slide = (slide-1)<1?0:slide-1;
+      }else {
+        console.log("same to same") ;
+      }  
+    }
+    
+
     this.setState({
-      currentSlide: difference - padding
+      currentSlide: slide
     }, function () {
       self.animateSlide();
       self.setExternalData();
