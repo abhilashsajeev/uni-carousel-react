@@ -355,7 +355,6 @@ const Carousel = React.createClass({
   },
 
   nextSlide(velocity,distance) {
-    console.log("Got velocity inside nextSlide",velocity);
     var self = this;
     if (this.state.currentSlide + this.props.slidesToScroll >= this.props.children.length) {
       return;
@@ -367,18 +366,25 @@ const Carousel = React.createClass({
       this.diff = this.props.children.length - sum - 2;
       sum = this.state.currentSlide + this.diff;
     }else{
+      var endLimit = this.props.children.length - this.props.slidesToShow;
       if(velocity>=3){
         if(distance > window.innerWidth*0.8)
-          sum = 0;  
+          sum = endLimit;  
         else
-          sum = this.props.children.length - this.props.slidesToShow;
+          sum = (sum + 4)>(endLimit)?sum+2:sum+4;
       }else if(velocity === 2){
-        if(distance > window.innerWidth*0.65)
-          sum = (sum + 3)<=(this.props.children.length - this.props.slidesToShow)?sum+3:sum;
-        else
-          sum = (sum + 3)<=(this.props.children.length - this.props.slidesToShow)?sum+2:sum;
-      }else if(velocity === 1){
-        sum = (sum + 2)<=(this.props.children.length - this.props.slidesToShow)?sum+2:sum; 
+        if(distance > window.innerWidth*0.65){
+          if((sum + 3)<=(endLimit)){
+            sum +=3;           
+          }else if((sum + 3)<=(endLimit)){
+            sum +=2;
+          }else{
+            sum = (sum + 1)<=(endLimit)?sum+1:endLimit;  
+          }
+        }
+        
+      }else if(velocity === 1 && distance > window.innerWidth * 0.45){
+        sum = (sum + 2)<=(endLimit)?sum+2:endLimit; 
       }else {
        console.log("same to same") ;
       }  
