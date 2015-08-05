@@ -382,14 +382,6 @@ const Carousel = React.createClass({
         padding = 1;
       }      
     }
-    // if(this.props.children.length - (this.state.currentSlide+1)<3){
-    //   padding = 1;
-    // }    
-    
-    // if(this.diff>0){
-    //   padding = this.diff;
-    //   this.diff -= 1  ;
-    // }
     this.setState({
       currentSlide: difference - padding
     }, function () {
