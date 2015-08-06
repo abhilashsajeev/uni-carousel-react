@@ -334,7 +334,6 @@ const Carousel = React.createClass({
       }
     }
     return 0;
-
   },
 
   // Action Methods
@@ -353,7 +352,7 @@ const Carousel = React.createClass({
   },
 
   nextSlide(velocity,distance) {
-        var self = this;
+    var self = this;
     if (this.state.currentSlide + this.props.slidesToScroll >= this.props.children.length) {
       return;
     }
