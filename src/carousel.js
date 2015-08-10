@@ -365,7 +365,8 @@ const Carousel = React.createClass({
     }else{
       var endLimit = this.props.children.length - this.props.slidesToShow;
       if(velocity>=3){
-        if(distance > window.innerWidth*0.75)
+        // console.log("velocity 3");
+        if(distance > window.innerWidth*0.35)
           sum = endLimit;  
         else
           sum = (sum + 4)>(endLimit)?endLimit:sum+4;
@@ -387,7 +388,7 @@ const Carousel = React.createClass({
       }else if(velocity === 0 && distance > window.innerWidth * 0.60) {
         sum = (sum + 1)<=(endLimit)?sum+1:endLimit; 
       }else{
-        console.log("do nothing special");
+        // console.log("do nothing special");
       }  
     }
     this.setState({
@@ -410,15 +411,15 @@ const Carousel = React.createClass({
       slide  = 0;
     }else{
       if(velocity>=3){
-        if(distance > window.innerWidth*0.8){
+        if(distance > window.innerWidth*0.35){
           slide = 0;  
         }else{
-          slide = (slide-3)<1?0:slide-3;  
+          slide = (slide-4)<1?0:slide-4;  
         }
         
       }else if(velocity === 2){
         if(distance > window.innerWidth*0.65)
-          slide = (slide-2)<0?0:slide-2;
+          slide = (slide-3)<0?0:slide-3;
         else
           slide = (slide-2)<0?0:slide-1;
 
