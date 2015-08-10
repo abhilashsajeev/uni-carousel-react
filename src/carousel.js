@@ -414,7 +414,7 @@ const Carousel = React.createClass({
         if(distance > window.innerWidth*0.35){
           slide = 0;  
         }else{
-          slide = (slide-4)<1?0:slide-4;  
+          slide = (slide-4)<0?0:slide-4;  
         }
         
       }else if(velocity === 2){
