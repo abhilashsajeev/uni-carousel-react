@@ -168,7 +168,7 @@ const Carousel = React.createClass({
         var rightEndLimit = self.props.children.length - self.props.slidesToShow;
         var leftEndLimit = 0;
         var length = 0;
-        if(self.props.children>self.props.slidesToShow)  {
+        if(self.props.children.length > self.props.slidesToShow)  {
           if(direction ===1 && self.state.currentSlide>= rightEndLimit){
             length = 10;
           }else if(direction === -1 && self.state.currentSlide<= leftEndLimit){
@@ -246,7 +246,7 @@ const Carousel = React.createClass({
         var rightEndLimit = self.props.children.length - self.props.slidesToShow;
         var leftEndLimit = 0;
         var length = 0;
-        if(self.props.children>self.props.slidesToShow)  {
+        if(self.props.children.length > self.props.slidesToShow)  {
           if(direction ===1 && self.state.currentSlide>= rightEndLimit){
             length = 10;
           }else if(direction === -1 && self.state.currentSlide<= leftEndLimit){
