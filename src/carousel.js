@@ -172,8 +172,14 @@ const Carousel = React.createClass({
           length = 10;
         }else if(direction === -1 && self.state.currentSlide<= leftEndLimit){
           length = 10;
+        }else if(direction ===1 && self.state.currentSlide === rightEndLimit-1){
+          var temp = Math.round(Math.sqrt(Math.pow(e.touches[0].pageX - self.touchObject.startX, 2)));
+          length = temp>Math.round(window.innerWidth/self.props.slidesToShow)?Math.round(window.innerWidth/3)+10:temp;
+        }else if(direction === -1 && self.state.currentSlide === 1){
+          var temp = Math.round(Math.sqrt(Math.pow(e.touches[0].pageX - self.touchObject.startX, 2)));
+          length = temp>Math.round(window.innerWidth/self.props.slidesToShow)?Math.round(window.innerWidth/3)+10:temp;
         }else{
-          length = Math.round(Math.sqrt(Math.pow(e.touches[0].pageX - self.touchObject.startX, 2)));
+          length = self.props.vertical ? Math.round(Math.sqrt(Math.pow(e.touches[0].pageY - self.touchObject.startY, 2))) : Math.round(Math.sqrt(Math.pow(e.touches[0].pageX - self.touchObject.startX, 2)));
         }
         self.touchObject = {
           startX: self.touchObject.startX,
@@ -235,13 +241,19 @@ const Carousel = React.createClass({
         if (direction !== 0) {
           e.preventDefault();
         }
-        var rightEndLimit = self.props.children.length - self.props.slidesToShow;
+         var rightEndLimit = self.props.children.length - self.props.slidesToShow;
         var leftEndLimit = 0;
         var length;
         if(direction ===1 && self.state.currentSlide>= rightEndLimit){
           length = 10;
         }else if(direction === -1 && self.state.currentSlide<= leftEndLimit){
           length = 10;
+        }else if(direction ===1 && self.state.currentSlide === rightEndLimit-1){
+          var temp = Math.round(Math.sqrt(Math.pow(e.clientX - self.touchObject.startX, 2)));
+          length = temp>Math.round(window.innerWidth/self.props.slidesToShow)?Math.round(window.innerWidth/3)+10:temp;
+        }else if(direction === -1 && self.state.currentSlide === 1){
+          var temp = Math.round(Math.sqrt(Math.pow(e.clientX - self.touchObject.startX, 2)));
+          length = temp>Math.round(window.innerWidth/self.props.slidesToShow)?Math.round(window.innerWidth/3)+10:temp;
         }else{
           length = self.props.vertical ? Math.round(Math.sqrt(Math.pow(e.clientY - self.touchObject.startY, 2))) : Math.round(Math.sqrt(Math.pow(e.clientX - self.touchObject.startX, 2)));
         }
