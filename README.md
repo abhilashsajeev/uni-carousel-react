@@ -15,7 +15,7 @@ npm install uni-carousel-react --save
 ```
 
 ### Documentation is much same as that of **nuka-carousel**. Remember this is just an extension of **nuka-carousel** with some additional features.
-But you donot need to provide slideToScroll property any more. it defaults to 1 and changes accoding to swipe speed.
+But you donot need to provide **slideToScroll** property any more. it defaults to 1 and changes accoding to swipe speed.
 
 ## **Feel Free to edit and make this code better**
 **Help me to improve performance of the code and to make a useful version so that react developers all over the world can use it with trust  **
