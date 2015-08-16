@@ -2,6 +2,12 @@
 
 ### This is an enhanced port of nuka-carousel
 
+## Features implemedted in addition to nuka-carousel
+  * Slide scrolls according to swipe speed.
+  * End firction improved.
+  * No empty space at the edges.
+  * More suitable for carousel containing multiple items
+
 ## Created for a custom usage we recomend not to use it for production.  
 I strongly reccomend not to use this in production untill we stabilises it. For production use nuka-carousel.
 
