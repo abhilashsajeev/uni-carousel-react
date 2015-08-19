@@ -3,7 +3,9 @@ var Carousel = require('uni-carousel-react');
 var CarouselSlider = React.createClass({
   render:function(){
     return (
-    	<Carousel>
+    	<Carousel slidesToShow={3} cellAlign="left"  edgeEasing="linear"
+			dragging = {false} speed={500}  framePadding="0px" cellSpacing={0}
+			decorators={[]}>
 			<img src="http://placehold.it/1000x400&text=slide1"/>
 	        <img src="http://placehold.it/1000x400&text=slide2"/>
 	        <img src="http://placehold.it/1000x400&text=slide3"/>
@@ -14,4 +16,4 @@ var CarouselSlider = React.createClass({
     	);
   }
 });
-React.render(CarouselSlider,document.getElementById('main'));
+React.render(<CarouselSlider/>,document.getElementById('main'));
