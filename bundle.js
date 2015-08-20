@@ -5,7 +5,7 @@ var CarouselSlider = React.createClass({displayName: "CarouselSlider",
   mixins:[Carousel.ControllerMixin],
   render:function(){
     return (
-    	React.createElement(Carousel, {slidesToShow: 1, cellAlign: "left", edgeEasing: "linear", 
+    	React.createElement(Carousel, {slidesToShow: 3, cellAlign: "left", edgeEasing: "linear", 
 			dragging: true, speed: 500, framePadding: "0px", cellSpacing: 20, decorators:[]
 			}, 
 			React.createElement("img", {src: "http://lorempixel.com/500/500/nature/1/"}), 
