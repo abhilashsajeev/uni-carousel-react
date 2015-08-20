@@ -15,7 +15,7 @@ var CarouselSlider = React.createClass({displayName: "CarouselSlider",
 	        React.createElement("img", {src: "http://lorempixel.com/500/500/nature/6/"}),
 	        React.createElement("img", {src: "http://lorempixel.com/500/500/nature/7/"}),
 	        React.createElement("img", {src: "http://lorempixel.com/500/500/nature/8/"}),
-	        React.createElement("img", {src: "http://lorempixel.com/500/500/nature/9/"}),
+	        React.createElement("img", {src: "http://lorempixel.com/500/500/city/9/"}),
 	        React.createElement("img", {src: "http://lorempixel.com/500/500/sports/1/"}),
 	        React.createElement("img", {src: "http://lorempixel.com/500/500/sports/2/"}),
 	        React.createElement("img", {src: "http://lorempixel.com/500/500/sports/3/"})
