@@ -1,15 +1,13 @@
 # uni-carousel-react
 
-### This is an enhanced port of nuka-carousel
+## This is an enhanced port of nuka-carousel 
 
-## Features implemedted in addition to nuka-carousel
+## Features implemedted in addition to nuka-carousel see [Demo](http://abhilashsajeev.github.io/uni-carousel-react)
   * Slide scrolls according to swipe speed.
   * End firction improved.
   * No empty space at the edges.
   * More suitable for carousel containing multiple items
 
-## Created for a custom usage we recomend not to use it for production.  
-I strongly reccomend not to use this in production untill we stabilises it. For production use nuka-carousel.
 
 ### Our primery aim to make this work in protrait mode with 3 items to show.
 There is a difference from nuka-carousel, user does not need to pass **slideToScroll** as property any more, By default it is 1 and according to your swipe speed the **slideToScroll** adjusts automatically
