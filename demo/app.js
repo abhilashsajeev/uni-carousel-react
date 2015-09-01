@@ -11,6 +11,7 @@ const App = React.createClass({
     return (
       <div style={{width: '50%', margin: 'auto'}}>
         <Carousel
+        slidesToShow={3}
           ref="carousel"
           data={this.setCarouselData.bind(this, 'carousel')}>
           <img src="http://placehold.it/1000x400&text=slide1"/>
