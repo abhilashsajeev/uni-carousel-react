@@ -2,7 +2,7 @@
 
 ## This is an enhanced port of nuka-carousel 
 
-## Features implemeted in addition to nuka-carousel see [Demo](http://abhilashsajeev.github.io/uni-carousel-react)
+## Features implemented in addition to nuka-carousel see [Demo](http://abhilashsajeev.github.io/uni-carousel-react)
   * Slide scrolls according to swipe speed.
   * End firction improved.
   * No empty space at the edges.
