@@ -1,7 +1,8 @@
 'use strict';
 
-import Carousel from '../src/Carousel';
-import React from 'react/addons';
+import Carousel from '../src/carousel';
+import React from 'react';
+import ReactDom from 'react-dom';
 
 window.React = React;
 
@@ -11,7 +12,6 @@ const App = React.createClass({
     return (
       <div style={{width: '50%', margin: 'auto'}}>
         <Carousel
-        slidesToShow={3}
           ref="carousel"
           data={this.setCarouselData.bind(this, 'carousel')}>
           <img src="http://placehold.it/1000x400&text=slide1"/>
@@ -28,5 +28,5 @@ const App = React.createClass({
 
 const content = document.getElementById('content');
 
-React.render(<App/>, content)
+ReactDom.render(<App/>, content)
 

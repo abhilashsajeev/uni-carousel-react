@@ -1,12 +1,12 @@
 {
-  "name": "uni-carousel-react",
+  "name": "nuka-carousel",
   "main": "index.js",
-  "version": "0.1.0",
+  "version": "0.0.9",
   "homepage": "https://github.com/kenwheeler/nuka-carousel",
   "authors": [
-    "Abhilash <abhilashsajeev@gmail.com>"
+    "Ken Wheeler <ken_wheeler@me.com>"
   ],
-  "description": "A custom edited version of nuka-carousel",
+  "description": "Pure React Carousel",
   "keywords": [
     "Carousel",
     "React",
