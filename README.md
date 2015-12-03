@@ -1,5 +1,7 @@
 # uni-carousel-react
 
+## Please note that this version works with react 0.13.* We have not updating this to react 0.14 for a while because we use react0.13 in out project.
+
 ## This is an enhanced port of nuka-carousel 
 
 ## Features implemented in addition to nuka-carousel see [Demo](http://abhilashsajeev.github.io/uni-carousel-react)
