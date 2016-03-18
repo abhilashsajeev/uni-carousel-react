@@ -17,85 +17,34 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 window.React = _react2.default;
 
-var App = _react2.default.createClass({
-  displayName: 'App',
+var content = document.getElementById('main');
 
-  mixins: [_carousel2.default.ControllerMixin],
+var CarouselSlider = _react2.default.createClass({
+  displayName: 'CarouselSlider',
 
-  getInitialState: function getInitialState() {
-    return { slideIndex: 0 };
-  },
   render: function render() {
-    var _this = this;
-
     return _react2.default.createElement(
-      'div',
-      { style: { width: '50%', margin: 'auto' } },
-      _react2.default.createElement(
-        _carousel2.default,
-        {
-          ref: 'carousel',
-          data: this.setCarouselData.bind(this, 'carousel'),
-          slideIndex: this.state.slideIndex,
-          afterSlide: function afterSlide(newSlideIndex) {
-            return _this.setState({ slideIndex: newSlideIndex });
-          } },
-        _react2.default.createElement('img', { src: 'http://placehold.it/1000x400&text=slide1' }),
-        _react2.default.createElement('img', { src: 'http://placehold.it/1000x400&text=slide2' }),
-        _react2.default.createElement('img', { src: 'http://placehold.it/1000x400&text=slide3' }),
-        _react2.default.createElement('img', { src: 'http://placehold.it/1000x400&text=slide4' }),
-        _react2.default.createElement('img', { src: 'http://placehold.it/1000x400&text=slide5' }),
-        _react2.default.createElement('img', { src: 'http://placehold.it/1000x400&text=slide6' })
-      ),
-      _react2.default.createElement(
-        'button',
-        { onClick: function onClick() {
-            return _this.setState({ slideIndex: 0 });
-          } },
-        '1'
-      ),
-      _react2.default.createElement(
-        'button',
-        { onClick: function onClick() {
-            return _this.setState({ slideIndex: 1 });
-          } },
-        '2'
-      ),
-      _react2.default.createElement(
-        'button',
-        { onClick: function onClick() {
-            return _this.setState({ slideIndex: 2 });
-          } },
-        '3'
-      ),
-      _react2.default.createElement(
-        'button',
-        { onClick: function onClick() {
-            return _this.setState({ slideIndex: 3 });
-          } },
-        '4'
-      ),
-      _react2.default.createElement(
-        'button',
-        { onClick: function onClick() {
-            return _this.setState({ slideIndex: 4 });
-          } },
-        '5'
-      ),
-      _react2.default.createElement(
-        'button',
-        { onClick: function onClick() {
-            return _this.setState({ slideIndex: 5 });
-          } },
-        '6'
-      )
+      _carousel2.default,
+      { slidesToShow: 3, cellAlign: 'left', edgeEasing: 'linear',
+        dragging: true, speed: 500, framePadding: '0px', cellSpacing: 0,
+        decorators: [] },
+      _react2.default.createElement('img', { src: 'http://lorempixel.com/500/500/nature/1/' }),
+      _react2.default.createElement('img', { src: 'http://lorempixel.com/500/500/nature/2/' }),
+      _react2.default.createElement('img', { src: 'http://lorempixel.com/500/500/nature/3/' }),
+      _react2.default.createElement('img', { src: 'http://lorempixel.com/500/500/nature/4/' }),
+      _react2.default.createElement('img', { src: 'http://lorempixel.com/500/500/nature/5/' }),
+      _react2.default.createElement('img', { src: 'http://lorempixel.com/500/500/nature/6/' }),
+      _react2.default.createElement('img', { src: 'http://lorempixel.com/500/500/nature/7/' }),
+      _react2.default.createElement('img', { src: 'http://lorempixel.com/500/500/nature/8/' }),
+      _react2.default.createElement('img', { src: 'http://lorempixel.com/500/500/city/9/' }),
+      _react2.default.createElement('img', { src: 'http://lorempixel.com/500/500/sports/1/' }),
+      _react2.default.createElement('img', { src: 'http://lorempixel.com/500/500/sports/2/' }),
+      _react2.default.createElement('img', { src: 'http://lorempixel.com/500/500/sports/3/' })
     );
   }
 });
 
-var content = document.getElementById('content');
-
-_reactDom2.default.render(_react2.default.createElement(App, null), content);
+_reactDom2.default.render(_react2.default.createElement(CarouselSlider, null), content);
 
 },{"../src/carousel":163,"react":162,"react-dom":5}],2:[function(require,module,exports){
 // shim for using process in browser
@@ -19276,7 +19225,7 @@ var removeEvent = function removeEvent(elem, type, eventHandle) {
   }
 };
 
-Carousel = _react2.default.createClass({
+var Carousel = _react2.default.createClass({
   displayName: 'Carousel',
 
   mixins: [_reactTweenState2.default.Mixin],
