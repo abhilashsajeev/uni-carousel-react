@@ -242,7 +242,7 @@ var Carousel = React.createClass({
       onTouchEnd(e) {
         var distance = Math.abs(self.touchObject.startX - self.touchObject.endX);
         var end = +new Date();
-        var time = self.touchObject.time - end;
+        var time = end - self.touchObject.time;
         var velocity = Math.abs(Math.round(distance/time));
         self.handleSwipe(e,velocity);
       },
@@ -329,7 +329,7 @@ var Carousel = React.createClass({
         }
         var distance = Math.abs(self.touchObject.startX - self.touchObject.endX);
         var end = +new Date();
-        var time = self.touchObject.time - end;
+        var time = end - self.touchObject.time;
         var velocity = Math.abs(Math.round(distance/time));
         self.handleSwipe(e,velocity,distance);
       },
