@@ -1,10 +1,6 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
-var _carousel = require('../src/carousel');
-
-var _carousel2 = _interopRequireDefault(_carousel);
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -15,6 +11,9 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var Carousel = require('uni-carousel-react');
+
+
 window.React = _react2.default;
 
 var content = document.getElementById('main');
@@ -24,7 +23,7 @@ var CarouselSlider = _react2.default.createClass({
 
   render: function render() {
     return _react2.default.createElement(
-      _carousel2.default,
+      Carousel,
       { slidesToShow: 3, cellAlign: 'left', edgeEasing: 'linear',
         dragging: true, speed: 500, framePadding: '0px', cellSpacing: 0,
         decorators: [] },
@@ -46,7 +45,7 @@ var CarouselSlider = _react2.default.createClass({
 
 _reactDom2.default.render(_react2.default.createElement(CarouselSlider, null), content);
 
-},{"../src/carousel":163,"react":162,"react-dom":5}],2:[function(require,module,exports){
+},{"react":162,"react-dom":5,"uni-carousel-react":163}],2:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -19165,11 +19164,20 @@ module.exports = require('./lib/React');
 },{"./lib/React":30}],163:[function(require,module,exports){
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
+var Carousel = require('./lib/carousel');
+
+module.exports = Carousel;
+
+},{"./lib/carousel":164}],164:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var _react = require('react');
 
@@ -19195,9 +19203,7 @@ var _exenv = require('exenv');
 
 var _exenv2 = _interopRequireDefault(_exenv);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// React.initializeTouchEvents(true);
+_react2['default'].initializeTouchEvents(true);
 
 var addEvent = function addEvent(elem, type, eventHandle) {
   if (elem === null || typeof elem === 'undefined') {
@@ -19225,35 +19231,35 @@ var removeEvent = function removeEvent(elem, type, eventHandle) {
   }
 };
 
-var Carousel = _react2.default.createClass({
+Carousel = _react2['default'].createClass({
   displayName: 'Carousel',
 
-  mixins: [_reactTweenState2.default.Mixin],
+  mixins: [_reactTweenState2['default'].Mixin],
 
   propTypes: {
-    afterSlide: _react2.default.PropTypes.func,
-    beforeSlide: _react2.default.PropTypes.func,
-    cellAlign: _react2.default.PropTypes.oneOf(['left', 'center', 'right']),
-    cellSpacing: _react2.default.PropTypes.number,
-    data: _react2.default.PropTypes.func,
-    decorators: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.shape({
-      component: _react2.default.PropTypes.func,
-      position: _react2.default.PropTypes.oneOf(['TopLeft', 'TopCenter', 'TopRight', 'CenterLeft', 'CenterCenter', 'CenterRight', 'BottomLeft', 'BottomCenter', 'BottomRight']),
-      style: _react2.default.PropTypes.object
+    afterSlide: _react2['default'].PropTypes.func,
+    beforeSlide: _react2['default'].PropTypes.func,
+    cellAlign: _react2['default'].PropTypes.oneOf(['left', 'center', 'right']),
+    cellSpacing: _react2['default'].PropTypes.number,
+    data: _react2['default'].PropTypes.func,
+    decorators: _react2['default'].PropTypes.arrayOf(_react2['default'].PropTypes.shape({
+      component: _react2['default'].PropTypes.func,
+      position: _react2['default'].PropTypes.oneOf(['TopLeft', 'TopCenter', 'TopRight', 'CenterLeft', 'CenterCenter', 'CenterRight', 'BottomLeft', 'BottomCenter', 'BottomRight']),
+      style: _react2['default'].PropTypes.object
     })),
-    dragging: _react2.default.PropTypes.bool,
-    easing: _react2.default.PropTypes.string,
-    edgeEasing: _react2.default.PropTypes.string,
-    framePadding: _react2.default.PropTypes.string,
-    initialSlideHeight: _react2.default.PropTypes.number,
-    initialSlideWidth: _react2.default.PropTypes.number,
-    slideIndex: _react2.default.PropTypes.number,
-    slidesToShow: _react2.default.PropTypes.number,
-    slidesToScroll: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.number, _react2.default.PropTypes.oneOf(['auto'])]),
-    slideWidth: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.string, _react2.default.PropTypes.number]),
-    speed: _react2.default.PropTypes.number,
-    vertical: _react2.default.PropTypes.bool,
-    width: _react2.default.PropTypes.string
+    dragging: _react2['default'].PropTypes.bool,
+    easing: _react2['default'].PropTypes.string,
+    edgeEasing: _react2['default'].PropTypes.string,
+    framePadding: _react2['default'].PropTypes.string,
+    initialSlideHeight: _react2['default'].PropTypes.number,
+    initialSlideWidth: _react2['default'].PropTypes.number,
+    slideIndex: _react2['default'].PropTypes.number,
+    slidesToShow: _react2['default'].PropTypes.number,
+    slidesToScroll: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.number, _react2['default'].PropTypes.oneOf(['auto'])]),
+    slideWidth: _react2['default'].PropTypes.oneOfType([_react2['default'].PropTypes.string, _react2['default'].PropTypes.number]),
+    speed: _react2['default'].PropTypes.number,
+    vertical: _react2['default'].PropTypes.bool,
+    width: _react2['default'].PropTypes.string
   },
 
   getDefaultProps: function getDefaultProps() {
@@ -19263,7 +19269,7 @@ var Carousel = _react2.default.createClass({
       cellAlign: 'left',
       cellSpacing: 0,
       data: function data() {},
-      decorators: _decorators2.default,
+      decorators: _decorators2['default'],
       dragging: true,
       easing: 'easeOutCirc',
       edgeEasing: 'easeOutElastic',
@@ -19276,6 +19282,7 @@ var Carousel = _react2.default.createClass({
       width: '100%'
     };
   },
+
   getInitialState: function getInitialState() {
     return {
       currentSlide: this.props.slideIndex,
@@ -19288,50 +19295,55 @@ var Carousel = _react2.default.createClass({
       top: 0
     };
   },
+
   componentWillMount: function componentWillMount() {
     this.setInitialDimensions();
   },
+
   componentDidMount: function componentDidMount() {
     this.setDimensions();
     this.bindEvents();
     this.setExternalData();
   },
+
   componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
     this.setDimensions();
     if (nextProps.slideIndex !== this.state.currentSlide) {
       this.goToSlide(nextProps.slideIndex);
     }
   },
+
   componentWillUnmount: function componentWillUnmount() {
     this.unbindEvents();
   },
+
   render: function render() {
     var self = this;
-    var children = _react2.default.Children.count(this.props.children) > 1 ? this.formatChildren(this.props.children) : this.props.children;
-    return _react2.default.createElement(
+    var children = _react2['default'].Children.count(this.props.children) > 1 ? this.formatChildren(this.props.children) : this.props.children;
+    return _react2['default'].createElement(
       'div',
-      { className: ['slider', this.props.className || ''].join(' '), ref: 'slider', style: (0, _objectAssign2.default)(this.getSliderStyles(), this.props.style || {}) },
-      _react2.default.createElement(
+      { className: ['slider', this.props.className || ''].join(' '), ref: 'slider', style: (0, _objectAssign2['default'])(this.getSliderStyles(), this.props.style || {}) },
+      _react2['default'].createElement(
         'div',
         _extends({ className: 'slider-frame',
           ref: 'frame',
           style: this.getFrameStyles()
         }, this.getTouchEvents(), this.getMouseEvents(), {
           onClick: this.handleClick }),
-        _react2.default.createElement(
+        _react2['default'].createElement(
           'ul',
           { className: 'slider-list', ref: 'list', style: this.getListStyles() },
           children
         )
       ),
       this.props.decorators ? this.props.decorators.map(function (Decorator, index) {
-        return _react2.default.createElement(
+        return _react2['default'].createElement(
           'div',
           {
-            style: (0, _objectAssign2.default)(self.getDecoratorStyles(Decorator.position), Decorator.style || {}),
+            style: (0, _objectAssign2['default'])(self.getDecoratorStyles(Decorator.position), Decorator.style || {}),
             className: 'slider-decorator-' + index,
             key: index },
-          _react2.default.createElement(Decorator.component, {
+          _react2['default'].createElement(Decorator.component, {
             currentSlide: self.state.currentSlide,
             slideCount: self.state.slideCount,
             frameWidth: self.state.frameWidth,
@@ -19344,10 +19356,9 @@ var Carousel = _react2.default.createClass({
             goToSlide: self.goToSlide })
         );
       }) : null,
-      _react2.default.createElement('style', { type: 'text/css', dangerouslySetInnerHTML: { __html: self.getStyleTagStyles() } })
+      _react2['default'].createElement('style', { type: 'text/css', dangerouslySetInnerHTML: { __html: self.getStyleTagStyles() } })
     );
   },
-
 
   // Touch Events
 
@@ -19361,8 +19372,7 @@ var Carousel = _react2.default.createClass({
         var start = +new Date();
         self.touchObject = {
           startX: e.touches[0].pageX,
-          startY: e.touches[0].pageY,
-          time: start
+          startY: e.touches[0].pageY
         };
       },
       onTouchMove: function onTouchMove(e) {
@@ -19416,7 +19426,6 @@ var Carousel = _react2.default.createClass({
       }
     };
   },
-
 
   clickSafe: true,
 
@@ -19503,6 +19512,7 @@ var Carousel = _react2.default.createClass({
       }
     };
   },
+
   handleClick: function handleClick(e) {
     if (this.clickSafe === true) {
       e.preventDefault();
@@ -19513,6 +19523,7 @@ var Carousel = _react2.default.createClass({
       }
     }
   },
+
   handleSwipe: function handleSwipe(e, velocity, distance) {
     var velocity = velocity || 0;
     var distance = distance || 0;
@@ -19524,14 +19535,14 @@ var Carousel = _react2.default.createClass({
 
     if (this.touchObject.length > this.state.slideWidth / this.props.slidesToShow / 5) {
       if (this.touchObject.direction === 1) {
-        if (this.state.currentSlide >= _react2.default.Children.count(this.props.children) - this.props.slidesToScroll) {
-          this.animateSlide(_reactTweenState2.default.easingTypes[this.props.edgeEasing]);
+        if (this.state.currentSlide >= this.props.children.length - this.props.slidesToScroll) {
+          this.animateSlide(_reactTweenState2['default'].easingTypes[this.props.edgeEasing]);
         } else {
           this.nextSlide(velocity, distance);
         }
       } else if (this.touchObject.direction === -1) {
         if (this.state.currentSlide <= 0) {
-          this.animateSlide(_reactTweenState2.default.easingTypes[this.props.edgeEasing]);
+          this.animateSlide(_reactTweenState2['default'].easingTypes[this.props.edgeEasing]);
         } else {
           this.previousSlide(velocity, distance);
         }
@@ -19546,6 +19557,7 @@ var Carousel = _react2.default.createClass({
       dragging: false
     });
   },
+
   swipeDirection: function swipeDirection(x1, x2, y1, y2) {
 
     var xDist, yDist, r, swipeAngle;
@@ -19577,12 +19589,11 @@ var Carousel = _react2.default.createClass({
     return 0;
   },
 
-
   // Action Methods
 
   goToSlide: function goToSlide(index) {
     var self = this;
-    if (index >= _react2.default.Children.count(this.props.children) || index < 0) {
+    if (index >= _react2['default'].Children.count(this.props.children) || index < 0) {
       return;
     }
 
@@ -19596,19 +19607,20 @@ var Carousel = _react2.default.createClass({
       self.setExternalData();
     });
   },
+
   nextSlide: function nextSlide(velocity, distance) {
     var self = this;
-    if (this.state.currentSlide + this.props.slidesToScroll >= _react2.default.Children.count(this.props.children)) {
+    if (this.state.currentSlide + this.props.slidesToScroll >= this.props.children.length) {
       return;
     }
 
     var sum = this.state.currentSlide + this.props.slidesToScroll;
     var adj = this.props.slidesToShow - this.props.slidesToScroll;
-    if (_react2.default.Children.count(this.props.children) - sum < this.props.slidesToShow) {
-      var diff = _react2.default.Children.count(this.props.children) - sum - adj;
+    if (this.props.children.length - sum < this.props.slidesToShow) {
+      var diff = this.props.children.length - sum - adj;
       sum = this.state.currentSlide + diff;
     } else {
-      var endLimit = _react2.default.Children.count(this.props.children) - this.props.slidesToShow;
+      var endLimit = this.props.children.length - this.props.slidesToShow;
       if (velocity >= 3) {
         // console.log("velocity 3");
         if (distance > window.innerWidth * 0.35) sum = endLimit;else sum = sum + 4 > endLimit ? endLimit : sum + 4;
@@ -19637,6 +19649,7 @@ var Carousel = _react2.default.createClass({
       self.setExternalData();
     });
   },
+
   previousSlide: function previousSlide(velocity, distance) {
     var self = this;
     var difference = this.state.currentSlide - this.props.slidesToScroll;
@@ -19673,16 +19686,16 @@ var Carousel = _react2.default.createClass({
     });
   },
 
-
   // Animation
 
   animateSlide: function animateSlide(easing, duration, endValue) {
     this.tweenState(this.props.vertical ? 'top' : 'left', {
-      easing: easing || _reactTweenState2.default.easingTypes[this.props.easing],
+      easing: easing || _reactTweenState2['default'].easingTypes[this.props.easing],
       duration: duration || this.props.speed,
       endValue: endValue || this.getTargetLeft()
     });
   },
+
   getTargetLeft: function getTargetLeft(touchOffset) {
     var offset;
     switch (this.props.cellAlign) {
@@ -19715,39 +19728,43 @@ var Carousel = _react2.default.createClass({
     return (this.state.slideWidth * this.state.currentSlide - offset) * -1;
   },
 
-
   // Bootstrapping
 
   bindEvents: function bindEvents() {
     var self = this;
-    if (_exenv2.default.canUseDOM) {
+    if (_exenv2['default'].canUseDOM) {
       addEvent(window, 'resize', self.onResize);
       addEvent(document, 'readystatechange', self.onReadyStateChange);
     }
   },
+
   onResize: function onResize() {
     this.setDimensions();
   },
+
   onReadyStateChange: function onReadyStateChange(event) {
     this.setDimensions();
   },
+
   unbindEvents: function unbindEvents() {
     var self = this;
-    if (_exenv2.default.canUseDOM) {
+    if (_exenv2['default'].canUseDOM) {
       removeEvent(window, 'resize', self.onResize);
       removeEvent(document, 'readystatechange', self.onReadyStateChange);
     }
   },
+
   formatChildren: function formatChildren(children) {
     var self = this;
     return children.map(function (child, index) {
-      return _react2.default.createElement(
+      return _react2['default'].createElement(
         'li',
         { className: 'slider-slide', style: self.getSlideStyles(), key: index },
         child
       );
     });
   },
+
   setInitialDimensions: function setInitialDimensions() {
     var self = this,
         slideWidth,
@@ -19762,13 +19779,14 @@ var Carousel = _react2.default.createClass({
 
     this.setState({
       frameWidth: this.props.vertical ? frameHeight : '100%',
-      slideCount: _react2.default.Children.count(this.props.children),
+      slideCount: _react2['default'].Children.count(this.props.children),
       slideWidth: slideWidth
     }, function () {
       self.setLeft();
       self.setExternalData();
     });
   },
+
   setDimensions: function setDimensions() {
     var self = this,
         slideWidth,
@@ -19780,7 +19798,7 @@ var Carousel = _react2.default.createClass({
         slideHeight;
 
     slidesToScroll = this.props.slidesToScroll;
-    frame = _reactDom2.default.findDOMNode(this.refs.frame);
+    frame = _reactDom2['default'].findDOMNode(this.refs.frame);
     firstSlide = frame.childNodes[0].childNodes[0];
     if (firstSlide) {
       firstSlide.style.height = 'auto';
@@ -19812,7 +19830,7 @@ var Carousel = _react2.default.createClass({
 
     this.setState({
       frameWidth: frameWidth,
-      slideCount: _react2.default.Children.count(this.props.children),
+      slideCount: _react2['default'].Children.count(this.props.children),
       slideWidth: slideWidth,
       slidesToScroll: slidesToScroll,
       left: this.props.vertical ? 0 : this.getTargetLeft(),
@@ -19821,13 +19839,13 @@ var Carousel = _react2.default.createClass({
       self.setLeft();
     });
   },
+
   setLeft: function setLeft() {
     this.setState({
       left: this.props.vertical ? 0 : this.getTargetLeft(),
       top: this.props.vertical ? this.getTargetLeft() : 0
     });
   },
-
 
   // Data
 
@@ -19837,12 +19855,11 @@ var Carousel = _react2.default.createClass({
     }
   },
 
-
   // Styles
 
   getListStyles: function getListStyles() {
-    var listWidth = this.state.slideWidth * _react2.default.Children.count(this.props.children);
-    var spacingOffset = this.props.cellSpacing * _react2.default.Children.count(this.props.children);
+    var listWidth = this.state.slideWidth * _react2['default'].Children.count(this.props.children);
+    var spacingOffset = this.props.cellSpacing * _react2['default'].Children.count(this.props.children);
     return {
       position: 'relative',
       display: 'block',
@@ -19859,6 +19876,7 @@ var Carousel = _react2.default.createClass({
       MozBoxSizing: 'border-box'
     };
   },
+
   getFrameStyles: function getFrameStyles() {
     return {
       position: 'relative',
@@ -19873,6 +19891,7 @@ var Carousel = _react2.default.createClass({
       MozBoxSizing: 'border-box'
     };
   },
+
   getSlideStyles: function getSlideStyles() {
     return {
       display: this.props.vertical ? 'block' : 'inline-block',
@@ -19888,6 +19907,7 @@ var Carousel = _react2.default.createClass({
       marginBottom: this.props.vertical ? this.props.cellSpacing / 2 : 'auto'
     };
   },
+
   getSliderStyles: function getSliderStyles() {
     return {
       position: 'relative',
@@ -19899,9 +19919,11 @@ var Carousel = _react2.default.createClass({
       visibility: this.state.slideWidth ? 'visible' : 'hidden'
     };
   },
+
   getStyleTagStyles: function getStyleTagStyles() {
     return '.slider-slide > img {width: 100%; display: block;}';
   },
+
   getDecoratorStyles: function getDecoratorStyles(position) {
     switch (position) {
       case 'TopLeft':
@@ -19996,6 +20018,7 @@ var Carousel = _react2.default.createClass({
         }
     }
   }
+
 });
 
 Carousel.ControllerMixin = {
@@ -20013,26 +20036,27 @@ Carousel.ControllerMixin = {
   }
 };
 
-exports.default = Carousel;
-
-},{"./decorators":164,"exenv":3,"object-assign":4,"react":162,"react-dom":5,"react-tween-state":6}],164:[function(require,module,exports){
+exports['default'] = Carousel;
+module.exports = exports['default'];
+},{"./decorators":165,"exenv":3,"object-assign":4,"react":162,"react-dom":5,"react-tween-state":6}],165:[function(require,module,exports){
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, '__esModule', {
   value: true
 });
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 var DefaultDecorators = [{
-  component: _react2.default.createClass({
+  component: _react2['default'].createClass({
     displayName: 'component',
+
     render: function render() {
-      return _react2.default.createElement(
+      return _react2['default'].createElement(
         'button',
         {
           style: this.getButtonStyles(this.props.currentSlide === 0),
@@ -20058,10 +20082,11 @@ var DefaultDecorators = [{
   }),
   position: 'CenterLeft'
 }, {
-  component: _react2.default.createClass({
+  component: _react2['default'].createClass({
     displayName: 'component',
+
     render: function render() {
-      return _react2.default.createElement(
+      return _react2['default'].createElement(
         'button',
         {
           style: this.getButtonStyles(this.props.currentSlide + this.props.slidesToScroll >= this.props.slideCount),
@@ -20087,19 +20112,20 @@ var DefaultDecorators = [{
   }),
   position: 'CenterRight'
 }, {
-  component: _react2.default.createClass({
+  component: _react2['default'].createClass({
     displayName: 'component',
+
     render: function render() {
       var self = this;
       var indexes = this.getIndexes(self.props.slideCount, self.props.slidesToScroll);
-      return _react2.default.createElement(
+      return _react2['default'].createElement(
         'ul',
         { style: self.getListStyles() },
         indexes.map(function (index) {
-          return _react2.default.createElement(
+          return _react2['default'].createElement(
             'li',
             { style: self.getListItemStyles(), key: index },
-            _react2.default.createElement(
+            _react2['default'].createElement(
               'button',
               {
                 style: self.getButtonStyles(self.props.currentSlide === index),
@@ -20147,6 +20173,6 @@ var DefaultDecorators = [{
   position: 'BottomCenter'
 }];
 
-exports.default = DefaultDecorators;
-
+exports['default'] = DefaultDecorators;
+module.exports = exports['default'];
 },{"react":162}]},{},[1]);

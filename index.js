@@ -1,6 +1,6 @@
 'use strict';
 
-import Carousel from '../src/carousel';
+var Carousel = require('uni-carousel-react');
 import React from 'react';
 import ReactDom from 'react-dom';
 
