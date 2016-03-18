@@ -19248,7 +19248,7 @@ var _exenv2 = _interopRequireDefault(_exenv);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_react2.default.initializeTouchEvents(true);
+// React.initializeTouchEvents(true);
 
 var addEvent = function addEvent(elem, type, eventHandle) {
   if (elem === null || typeof elem === 'undefined') {
