@@ -19203,7 +19203,7 @@ var _exenv = require('exenv');
 
 var _exenv2 = _interopRequireDefault(_exenv);
 
-_react2['default'].initializeTouchEvents(true);
+///_react2['default'].initializeTouchEvents(true);
 
 var addEvent = function addEvent(elem, type, eventHandle) {
   if (elem === null || typeof elem === 'undefined') {
