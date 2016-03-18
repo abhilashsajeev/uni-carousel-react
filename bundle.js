@@ -19361,7 +19361,8 @@ var Carousel = _react2.default.createClass({
         var start = +new Date();
         self.touchObject = {
           startX: e.touches[0].pageX,
-          startY: e.touches[0].pageY
+          startY: e.touches[0].pageY,
+          time: start
         };
       },
       onTouchMove: function onTouchMove(e) {
@@ -19523,7 +19524,7 @@ var Carousel = _react2.default.createClass({
 
     if (this.touchObject.length > this.state.slideWidth / this.props.slidesToShow / 5) {
       if (this.touchObject.direction === 1) {
-        if (this.state.currentSlide >= this.props.children.length - this.props.slidesToScroll) {
+        if (this.state.currentSlide >= _react2.default.Children.count(this.props.children) - this.props.slidesToScroll) {
           this.animateSlide(_reactTweenState2.default.easingTypes[this.props.edgeEasing]);
         } else {
           this.nextSlide(velocity, distance);
@@ -19597,17 +19598,17 @@ var Carousel = _react2.default.createClass({
   },
   nextSlide: function nextSlide(velocity, distance) {
     var self = this;
-    if (this.state.currentSlide + this.props.slidesToScroll >= this.props.children.length) {
+    if (this.state.currentSlide + this.props.slidesToScroll >= _react2.default.Children.count(this.props.children)) {
       return;
     }
 
     var sum = this.state.currentSlide + this.props.slidesToScroll;
     var adj = this.props.slidesToShow - this.props.slidesToScroll;
-    if (this.props.children.length - sum < this.props.slidesToShow) {
-      var diff = this.props.children.length - sum - adj;
+    if (_react2.default.Children.count(this.props.children) - sum < this.props.slidesToShow) {
+      var diff = _react2.default.Children.count(this.props.children) - sum - adj;
       sum = this.state.currentSlide + diff;
     } else {
-      var endLimit = this.props.children.length - this.props.slidesToShow;
+      var endLimit = _react2.default.Children.count(this.props.children) - this.props.slidesToShow;
       if (velocity >= 3) {
         // console.log("velocity 3");
         if (distance > window.innerWidth * 0.35) sum = endLimit;else sum = sum + 4 > endLimit ? endLimit : sum + 4;
