@@ -140,21 +140,21 @@ var Carousel = React.createClass({
 
   render() {
     var self = this;
-    var children = React.Children.count(this.props.children) > 1 ? this.formatChildren(this.props.children) : this.props.children;
+    var children = React.Children.count(self.props.children) > 1 ? self.formatChildren(self.props.children) : self.props.children;
     return (
-      <div className={['slider', this.props.className || ''].join(' ')} ref="slider" style={assign(this.getSliderStyles(), this.props.style || {})}>
+      <div className={['slider', self.props.className || ''].join(' ')} ref="slider" style={assign(self.getSliderStyles(), self.props.style || {})}>
         <div className="slider-frame"
           ref="frame"
-          style={this.getFrameStyles()}
-          {...this.getTouchEvents()}
-          {...this.getMouseEvents()}
-          onClick={this.handleClick}>
-          <ul className="slider-list" ref="list" style={this.getListStyles()}>
+          style={self.getFrameStyles()}
+          {...self.getTouchEvents()}
+          {...self.getMouseEvents()}
+          onClick={self.handleClick}>
+          <ul className="slider-list" ref="list" style={self.getListStyles()}>
             {children}
           </ul>
         </div>
-        {this.props.decorators ?
-          this.props.decorators.map(function(Decorator, index) {
+        {self.props.decorators ?
+          self.props.decorators.map(function(Decorator, index) {
             return (
               <div
                 style={assign(self.getDecoratorStyles(Decorator.position), Decorator.style || {})}
@@ -206,10 +206,10 @@ var Carousel = React.createClass({
         if (direction !== 0) {
           e.preventDefault();
         }
-        var rightEndLimit = React.Children.count(this.props.children) - self.props.slidesToShow;
+        var rightEndLimit = React.Children.count(self.props.children) - self.props.slidesToShow;
         var leftEndLimit = 0;
         var length = 0;
-        if(React.Children.count(this.props.children) > self.props.slidesToShow)  {
+        if(React.Children.count(self.props.children) > self.props.slidesToShow)  {
           if(direction ===1 && self.state.currentSlide>= rightEndLimit){
             length = 10;
           }else if(direction === -1 && self.state.currentSlide<= leftEndLimit){
@@ -289,10 +289,10 @@ var Carousel = React.createClass({
         if (direction !== 0) {
           e.preventDefault();
         }
-        var rightEndLimit = React.Children.count(this.props.children) - self.props.slidesToShow;
+        var rightEndLimit = React.Children.count(self.props.children) - self.props.slidesToShow;
         var leftEndLimit = 0;
         var length = 0;
-        if(React.Children.count(this.props.children) > self.props.slidesToShow)  {
+        if(React.Children.count(self.props.children) > self.props.slidesToShow)  {
           if(direction ===1 && self.state.currentSlide>= rightEndLimit){
             length = 10;
           }else if(direction === -1 && self.state.currentSlide<= leftEndLimit){
