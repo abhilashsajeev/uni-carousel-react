@@ -693,6 +693,7 @@ var Carousel = React.createClass({
   // Styles
 
   getListStyles() {
+    var self = this;
     var listWidth = this.state.slideWidth * React.Children.count(self.props.children);
     var spacingOffset = this.props.cellSpacing * React.Children.count(self.props.children);
     return {
