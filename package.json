@@ -1,6 +1,6 @@
 {
   "name": "uni-carousel-react",
-  "version": "0.2.6",
+  "version": "0.3.0",
   "description": "A custom edited version of nuka-carousel",
   "main": "index.js",
   "dependencies": {
