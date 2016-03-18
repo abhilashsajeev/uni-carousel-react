@@ -7,7 +7,6 @@ import decorators from './decorators';
 import assign from 'object-assign';
 import ExecutionEnvironment from 'exenv';
 
-React.initializeTouchEvents(true);
 
 const addEvent = function(elem, type, eventHandle) {
   if (elem === null || typeof (elem) === 'undefined') {
@@ -35,7 +34,7 @@ const removeEvent = function(elem, type, eventHandle) {
   }
 };
 
-Carousel = React.createClass({
+var Carousel = React.createClass({
   displayName: 'Carousel',
 
   mixins: [tweenState.Mixin],
@@ -207,10 +206,10 @@ Carousel = React.createClass({
         if (direction !== 0) {
           e.preventDefault();
         }
-        var rightEndLimit = self.props.children.length - self.props.slidesToShow;
+        var rightEndLimit = React.Children.count(this.props.children) - self.props.slidesToShow;
         var leftEndLimit = 0;
         var length = 0;
-        if(self.props.children.length > self.props.slidesToShow)  {
+        if(React.Children.count(this.props.children) > self.props.slidesToShow)  {
           if(direction ===1 && self.state.currentSlide>= rightEndLimit){
             length = 10;
           }else if(direction === -1 && self.state.currentSlide<= leftEndLimit){
@@ -236,8 +235,8 @@ Carousel = React.createClass({
         };
 
         self.setState({
-          left: self.props.vertical ? 0 : (self.state.slideWidth * self.state.currentSlide + self.touchObject.length * self.touchObject.direction) * -1,
-          top: self.props.vertical ? (self.state.slideWidth * self.state.currentSlide + self.touchObject.length * self.touchObject.direction) * -1 : 0
+          left: self.props.vertical ? 0 : self.getTargetLeft(self.touchObject.length * self.touchObject.direction),
+          top: self.props.vertical ? self.getTargetLeft(self.touchObject.length * self.touchObject.direction) : 0
         });
       },
       onTouchEnd(e) {
@@ -290,10 +289,10 @@ Carousel = React.createClass({
         if (direction !== 0) {
           e.preventDefault();
         }
-        var rightEndLimit = self.props.children.length - self.props.slidesToShow;
+        var rightEndLimit = React.Children.count(this.props.children) - self.props.slidesToShow;
         var leftEndLimit = 0;
         var length = 0;
-        if(self.props.children.length > self.props.slidesToShow)  {
+        if(React.Children.count(this.props.children) > self.props.slidesToShow)  {
           if(direction ===1 && self.state.currentSlide>= rightEndLimit){
             length = 10;
           }else if(direction === -1 && self.state.currentSlide<= leftEndLimit){
@@ -366,7 +365,7 @@ Carousel = React.createClass({
 
     if (this.touchObject.length > (this.state.slideWidth / this.props.slidesToShow) / 5) {
       if (this.touchObject.direction === 1) {
-        if (this.state.currentSlide >= this.props.children.length - this.props.slidesToScroll) {
+        if (this.state.currentSlide >= React.Children.count(this.props.children) - this.props.slidesToScroll) {
           this.animateSlide(tweenState.easingTypes[this.props.edgeEasing]);
         } else {
           this.nextSlide(velocity,distance);
@@ -442,17 +441,17 @@ Carousel = React.createClass({
 
   nextSlide(velocity,distance) {
     var self = this;
-    if (this.state.currentSlide + this.props.slidesToScroll >= this.props.children.length) {
+    if (this.state.currentSlide + this.props.slidesToScroll >= React.Children.count(this.props.children)) {
       return;
     }
 
     var sum = this.state.currentSlide + this.props.slidesToScroll;
     var adj = this.props.slidesToShow - this.props.slidesToScroll;
-    if((this.props.children.length - sum)<this.props.slidesToShow){
-      var diff = this.props.children.length - sum - adj;
+    if((React.Children.count(this.props.children) - sum)<this.props.slidesToShow){
+      var diff = React.Children.count(this.props.children) - sum - adj;
       sum = this.state.currentSlide + diff;
     }else{
-      var endLimit = this.props.children.length - this.props.slidesToShow;
+      var endLimit = React.Children.count(this.props.children) - this.props.slidesToShow;
       if(velocity>=3){
         // console.log("velocity 3");
         if(distance > window.innerWidth*0.35)
