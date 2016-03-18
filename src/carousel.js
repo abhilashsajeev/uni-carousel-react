@@ -355,6 +355,7 @@ var Carousel = React.createClass({
   },
 
   handleSwipe(e,velocity,distance) {
+    var self = this;
     var velocity = velocity ||0;
     var distance = distance ||0;
     if (typeof (this.touchObject.length) !== 'undefined' && this.touchObject.length > 44) {
