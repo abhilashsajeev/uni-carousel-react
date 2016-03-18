@@ -1,5 +1,7 @@
 # uni-carousel-react
 [![npm version](https://badge.fury.io/js/uni-carousel-react.svg)](https://badge.fury.io/js/uni-carousel-react)
+[![npm](https://img.shields.io/npm/dm/localeval.svg)](https://github.com/abhilashsajeev/uni-carousel-react)
+[![npm](https://img.shields.io/npm/dt/express.svg)](https://github.com/abhilashsajeev/uni-carousel-react)
 ## Please note that this version works with react 0.14.* (from version 0.3.x onwards) . For users who are still in react 0.13.3 use version 0.1.16.
 
 ## This is an enhanced port of nuka-carousel 
