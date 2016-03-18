@@ -19415,7 +19415,7 @@ var Carousel = _react2['default'].createClass({
       onTouchEnd: function onTouchEnd(e) {
         var distance = Math.abs(self.touchObject.startX - self.touchObject.endX);
         var end = +new Date();
-        var time = self.touchObject.time - end;
+        var time = end - self.touchObject.time;
         var velocity = Math.abs(Math.round(distance / time));
         self.handleSwipe(e, velocity);
       },
@@ -19497,7 +19497,7 @@ var Carousel = _react2['default'].createClass({
         }
         var distance = Math.abs(self.touchObject.startX - self.touchObject.endX);
         var end = +new Date();
-        var time = self.touchObject.time - end;
+        var time = end - self.touchObject.time;
         var velocity = Math.abs(Math.round(distance / time));
         self.handleSwipe(e, velocity, distance);
       },
@@ -19523,6 +19523,7 @@ var Carousel = _react2['default'].createClass({
   },
 
   handleSwipe: function handleSwipe(e, velocity, distance) {
+    var self = this;
     var velocity = velocity || 0;
     var distance = distance || 0;
     if (typeof this.touchObject.length !== 'undefined' && this.touchObject.length > 44) {
@@ -19856,6 +19857,7 @@ var Carousel = _react2['default'].createClass({
   // Styles
 
   getListStyles: function getListStyles() {
+    var self = this;
     var listWidth = this.state.slideWidth * _react2['default'].Children.count(self.props.children);
     var spacingOffset = this.props.cellSpacing * _react2['default'].Children.count(self.props.children);
     return {
