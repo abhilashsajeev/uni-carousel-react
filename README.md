@@ -1,6 +1,5 @@
 # uni-carousel-react
-[![Latest Stable Version](https://poser.pugx.org/phpunit/phpunit/version)](https://packagist.org/packages/phpunit/phpunit)
-[![Total Downloads](https://poser.pugx.org/phpunit/phpunit/downloads)](https://packagist.org/packages/phpunit/phpunit)
+[![npm version](https://badge.fury.io/js/uni-carousel-react.svg)](https://badge.fury.io/js/uni-carousel-react)
 ## Please note that this version works with react 0.14.* (from version 0.3.x onwards) . For users who are still in react 0.13.3 use version 0.1.16.
 
 ## This is an enhanced port of nuka-carousel 
