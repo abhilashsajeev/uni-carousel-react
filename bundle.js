@@ -19370,7 +19370,8 @@ var Carousel = _react2['default'].createClass({
         var start = +new Date();
         self.touchObject = {
           startX: e.touches[0].pageX,
-          startY: e.touches[0].pageY
+          startY: e.touches[0].pageY,
+          time: start
         };
       },
       onTouchMove: function onTouchMove(e) {
