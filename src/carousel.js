@@ -130,7 +130,7 @@ var Carousel = React.createClass({
   componentWillReceiveProps(nextProps) {
     this.setDimensions();
     if (nextProps.slideIndex !== this.state.currentSlide) {
-      this.goToSlide(nextProps.slideIndex);
+        // this.goToSlide(nextProps.slideIndex);
     }
   },
 
@@ -384,7 +384,9 @@ var Carousel = React.createClass({
     }
 
     this.touchObject = {};
-
+    self.props.children.map(function (item) {
+      item.props.checkFn(item.ref);
+    });
     this.setState({
       dragging: false
     });
@@ -437,6 +439,9 @@ var Carousel = React.createClass({
     }, function() {
       self.animateSlide();
       this.props.afterSlide(index);
+      self.props.children.map(function (item) {
+        item.props.checkFn(item.ref)
+      });
       self.setExternalData();
     });
   },
@@ -485,6 +490,7 @@ var Carousel = React.createClass({
       currentSlide: sum
     }, function () {
       self.animateSlide();
+      this.props.afterSlide(sum);
       self.setExternalData();
     });
   },
