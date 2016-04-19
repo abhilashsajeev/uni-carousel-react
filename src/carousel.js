@@ -122,6 +122,7 @@ var Carousel = React.createClass({
   },
 
   componentDidMount() {
+    var self = this;
     this.setDimensions();
     this.bindEvents();
     this.setExternalData();
@@ -384,9 +385,6 @@ var Carousel = React.createClass({
     }
 
     this.touchObject = {};
-    self.props.children.map(function (item) {
-      item.props.checkFn(item.ref);
-    });
     this.setState({
       dragging: false
     });
@@ -439,9 +437,6 @@ var Carousel = React.createClass({
     }, function() {
       self.animateSlide();
       this.props.afterSlide(index);
-      self.props.children.map(function (item) {
-        item.props.checkFn(item.ref)
-      });
       self.setExternalData();
     });
   },
